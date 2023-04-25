@@ -14,7 +14,7 @@ const routes = [
         name: 'admin',
         component: () => import('@/views/PicControl.vue'),
         meta: {
-            title: '管理'
+            title: '圖片管理'
         }
     },
 ]
