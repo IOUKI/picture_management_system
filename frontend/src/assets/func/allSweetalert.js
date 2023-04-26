@@ -21,27 +21,11 @@ export const errorAlert = (title) => {
     })
 }
 
-export const deleteImage = async (apiUrl, imageName) => {
+// show image
+export const showImage = (imageUrlPath) => {
     Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
-    }).then( async (result) => {
-        if (result.isConfirmed) {
-            const response = await fetch(apiUrl + `/images/${imageName}`, {
-                method: "DELETE",
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            })
-
-            if (response.status === 204) {
-                successfullyAlert('移除成功')
-            }
-        }
+        imageUrl: imageUrlPath,
+        imageWidth: 1000,
+        imageAlt: 'image',
     })
 }

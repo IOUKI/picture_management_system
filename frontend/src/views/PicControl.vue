@@ -61,7 +61,7 @@ const uploadFile = async () => {
         console.error(error);
     }
 }
-// 取得所有圖片名稱
+// 取得所有圖片
 const getAllImage = async () => {
     const response = await fetch(apiUrl + '/images', {
         method: "GET",
