@@ -1,7 +1,9 @@
 <template>
     <div class="w-full h-screen flex">
-        <section class="w-1/2 h-full hidden lg:flex justify-center items-center bg-gray-500">
-            <h1 class="text-5xl">影片</h1>
+        <section class="w-1/2 h-full hidden lg:block justify-center bg-gray-500">
+            <!-- <h1 class="text-5xl">影片</h1> -->
+            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
         </section>
         <section class="window w-full lg:w-1/2 h-full flex justify-center">
             <div id="imageArea" class="w-full h-full flex flex-wrap justify-center overflow-y-scroll">
