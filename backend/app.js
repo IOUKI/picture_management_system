@@ -21,12 +21,12 @@ app.use(express.json())
 // routes
 // 設定圖片儲存的位置和檔名
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'images/');
-  },
-  filename: (req, file, cb) => {
-    cb(null, `${Date.now()}${path.extname(file.originalname)}`);
-  }
+    destination: (req, file, cb) => {
+        cb(null, 'images/');
+    },
+    filename: (req, file, cb) => {
+        cb(null, `${Date.now()}${path.extname(file.originalname)}`);
+    }
 });
 
 // 設定multer的upload中介軟體
@@ -73,7 +73,7 @@ app.get('/images', (req, res, next) => {
 
 // 移除相片
 app.delete('/images/:imageName', (req, res, next) => {
-    const imageName = req.params.imageName 
+    const imageName = req.params.imageName
     fs.unlink(__dirname + `/images/${imageName}`, (err) => {
         if (err) next(err)
         res.sendStatus(204)
