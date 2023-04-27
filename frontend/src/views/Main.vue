@@ -21,6 +21,12 @@ import { apiUrl } from "../assets/func/apiUrl"
 
 let images = ref([])
 let running = true
+
+const sleep = async (time) => {
+    return new Promise(resolve => setTimeout(resolve, time))
+}
+
+// 取得圖片
 const getAllImageLoop = async () => {
     while (running) {
 
@@ -45,19 +51,21 @@ const getAllImageLoop = async () => {
     }
 }
 
-let isScrollingDown = true
-const autoScroll = () => {
+const autoScrollImage = async () => {
     const imageArea = document.getElementById('imageArea')
-    if (isScrollingDown) {
-        imageArea.scrollBy(0, 1);
-        if (imageArea.scrollTop == (imageArea.scrollHeight - imageArea.offsetHeight)) {
-            isScrollingDown = false;
+    await sleep(3000)
+    while (running) {
+        // 偵測是否到最底部
+        // scrollHeight(元素內容高度的度量，包括由於溢出而在屏幕上不可見的內容) 
+        // scrollTop(向上捲動高度)
+        // offsetHeight(元素高度)
+        if (imageArea.scrollHeight - imageArea.scrollTop === imageArea.offsetHeight) { 
+            await sleep(1000)
+            imageArea.scrollTo(0, 0)
+        } else {
+            imageArea.scrollBy(0, 1)
         }
-    } else {
-        imageArea.scrollTo(0, 0)
-        if (imageArea.scrollTop == 0) {
-            isScrollingDown = true;
-        }
+        await sleep(10)
     }
 }
 
@@ -65,11 +73,11 @@ onMounted(async () => {
     nextTick(async () => {
         await getAllImageLoop()
     })
-    nextTick(() => {
-        setInterval(autoScroll, 10)
-        clearInterval(autoScroll)
+    nextTick(async () => {
+        await autoScrollImage()
     })
 })
+
 onBeforeUnmount(() => {
     running = false
 })
